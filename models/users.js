@@ -12,7 +12,7 @@ const userSchema = new Schema({
         required: true
     },
     status: {
-        type: String,
+        type: Object,
         default: 'I Am New To Post-It'
     },
     posts: [{

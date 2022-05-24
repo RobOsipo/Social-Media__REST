@@ -11,7 +11,7 @@ exports.getPosts = (req, res, next) => {
     })
     .catch((err) => {
       if (!err.statusCode) {
-        err.statucCode = 500;
+        err.statusCode = 500;
       }
       console.log("failed to get single post by ID", err);
       next(err);
@@ -25,13 +25,13 @@ exports.createPost = (req, res, next) => {
     error.statusCode = 422;
     throw error;
   }
-  const { title, content, imageUrl } = req.body;
+  const { title, content, imageUrl, creator } = req.body;
 
   const post = new Post({
     title: title,
     content: content,
     imageUrl: imageUrl,
-    creator: { name: "Rob" },
+    creator: creator,
   });
   post
     .save()
@@ -44,7 +44,7 @@ exports.createPost = (req, res, next) => {
     })
     .catch((err) => {
       if (!err.statusCode) {
-        err.statucCode = 500;
+        err.statusCode = 500;
       }
       console.log("failed to create post", err);
       next(err);
@@ -66,7 +66,7 @@ exports.getPost = (req, res, next) => {
     })
     .catch((err) => {
       if (!err.statusCode) {
-        err.statucCode = 500;
+        err.statusCode = 500;
       }
       console.log("failed to get single post by ID", err);
       next(err);

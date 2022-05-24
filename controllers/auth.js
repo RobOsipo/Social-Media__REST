@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -28,7 +29,7 @@ exports.register = (req, res, next) => {
     })
     .catch((err) => {
       if (!err.statusCode) {
-        err.statucCode = 500;
+        err.statusCode = 500;
       }
       console.log("failed to create post", err);
       next(err);
@@ -58,13 +59,13 @@ exports.login = (req, res, next) => {
       const token = jwt.sign({
         email: loadedUser.email,
         userId: loadedUser._id.toString(),
-      }, 'gugigistufandog', {expiresIn: '1h'});
+      }, process.env.SECRET, {expiresIn: '1h'});
 
       res.status(200).json({token: token, userId: loadedUser._id.toString()});
     })
     .catch((err) => {
       if (!err.statusCode) {
-        err.statucCode = 500;
+        err.statusCode = 500;
       }
       console.log("failed to create post", err);
       next(err);
