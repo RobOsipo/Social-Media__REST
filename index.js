@@ -37,3 +37,6 @@ mongoose
     app.listen(5000, () => console.log("listening on 5000"));
   })
   .catch((err) => console.log("connecting to mongoDB Atlas failed", err));
+
+
+module.exports = app
