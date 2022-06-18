@@ -109,27 +109,26 @@ exports.updatePost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-    const {postId} = req.params
-    Post.findById(postId)
-        .then(post => {
-            // delete once I have 
-            if (!post) {
-                const error = new Error("Could not find a post to delete");
-                error.statusCode = 404;
-                throw error;
-              }
-              return Post.findByIdAndRemove(postId)
-              
-        })
-        .then(result => {
-            console.log('results', result)
-            res.status(200).json({message: 'Post deleted successfully'})
-        })
-        .catch((err) => {
-            if (!err.statusCode) {
-              err.statusCode = 500;
-            }
-            console.log("failed to get single post by ID and delete it", err);
-            next(err);
-          })
-}
+  const { postId } = req.params;
+  Post.findById(postId)
+    .then((post) => {
+      // delete once I have
+      if (!post) {
+        const error = new Error("Could not find a post to delete");
+        error.statusCode = 404;
+        throw error;
+      }
+      return Post.findByIdAndRemove(postId);
+    })
+    .then((result) => {
+      console.log("results", result);
+      res.status(200).json({ message: "Post deleted successfully" });
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      console.log("failed to get single post by ID and delete it", err);
+      next(err);
+    });
+};

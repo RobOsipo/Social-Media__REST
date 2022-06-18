@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -55,12 +55,16 @@ exports.login = (req, res, next) => {
         throw error;
       }
 
-      const token = jwt.sign({
-        email: loadedUser.email,
-        userId: loadedUser._id.toString(),
-      }, process.env.SECRET, {expiresIn: '1h'});
+      const token = jwt.sign(
+        {
+          email: loadedUser.email,
+          userId: loadedUser._id.toString(),
+        },
+        process.env.SECRET,
+        { expiresIn: "1h" }
+      );
 
-      res.status(200).json({token: token, userId: loadedUser._id.toString()});
+      res.status(200).json({ token: token, userId: loadedUser._id.toString() });
     })
     .catch((err) => {
       if (!err.statusCode) {

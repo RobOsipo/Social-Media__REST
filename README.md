@@ -1,2 +1,4 @@
 ## A REST API for building social media websites
-***ACA Capstone***
+
+***Current production API for Client-side project "Post-It"***
+
